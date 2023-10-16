@@ -1,7 +1,7 @@
 const express = require("express");
 const friendsController = require('../controllers/friendsController')
 const router = express.Router();
-const friends = require('../models/friends')
+let friends = require('../models/friends')
 
 
 // TODO - #1: Add support to the 'filter' endpoint for a new query parameter 'letter' which filters friends by starting letter
@@ -50,7 +50,7 @@ router.post('/', (req, res) => {
 // 4. Complete this new route for a PUT request which will update data for an existing friend
 router.put('/:id', (req, res) => {
     // MOVED TO CONTROLLER
-    friendsController.putFriend(req, res)
+    friends = friendsController.putFriend(req, res)
 })
 
 module.exports = router;

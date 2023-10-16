@@ -77,13 +77,18 @@ const putFriend = (req, res) => {
     let updatedFriend = req.body;
 
     // Replace the old friend data for friendId with the new data from updatedFriend
-    for (newData in updatedFriend) {
-        friends[newData] = updatedFriend[newData]
-    }
+    friends.forEach( friend => {
+        if (friend.id == friendId) {
+            for (newData in updatedFriend) {
+                friend[newData] = updatedFriend[newData]
+            }
+        }
+    })
 
     // Modify this response with the updated friend, or a 404 if not found
     friends[friendId] ? res.status(200).json({result: 'Updated friend with ID ' + friendId, data: updatedFriend}) : 
     res.status(404).json({result:`Friend ${friendId} not found`})
+    return friends;
 }
 
 exports.getFriends = getFriends;
